@@ -1,0 +1,22 @@
+---
+- name: Implementing Tags
+  hosts: all
+  tasks:
+    - name: Install tree
+      apt:
+        name: tree
+        state: present
+        update_cache: yes
+      tags: tree_installation
+    - name: Create user
+      user:
+        name: anu
+        password: intelliqit
+      tags:
+        - user_creation
+        - never
+    - name: Copy passwd file
+      copy:
+        src: /etc/passwd
+        dest: /tmp
+...
