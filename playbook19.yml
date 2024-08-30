@@ -1,0 +1,16 @@
+---
+- name: Download jenkins.war
+  hosts: all
+  vars:
+    - a: 10
+  tasks:
+    - name: Download jenkins
+      get_url:
+        url: https://get.jenkins.io/war-stable/2.462.1/jenkins.war
+        dest: /tmp
+      when: a == 20
+    - name: Delete the jenkins.war file
+      file:
+        name: /tmp/jenkins.war
+        state: absent
+      when: a == 10

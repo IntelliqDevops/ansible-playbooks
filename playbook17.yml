@@ -1,0 +1,20 @@
+---
+- name: Error Handling or Exception Handling
+  hosts: all
+  tasks:
+    - block:
+       - name: Install git on Ubuntu servers using apt
+         apt:
+           name: git
+           state: present
+           update_cache: yes
+      rescue:
+        - name: Install git on RHEL servers using yum
+          yum:
+            name: git
+            state: present
+            update_cache: yes
+      always:
+        - name: Display output of above modules
+          debug:
+            msg: "Git Installtion is done"
