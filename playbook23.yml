@@ -1,0 +1,17 @@
+---
+- name: Check for packages 
+  hosts: all
+  tasks:
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: present
+      register: a
+    - name: Display output of the above module
+      debug:
+        var: a
+    - name: Restart apache2 only if it is installed with this playbook
+      service:
+        name: apache2
+        state: restarted
+      when: a.changed == true

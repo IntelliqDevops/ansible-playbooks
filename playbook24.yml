@@ -1,0 +1,19 @@
+---
+- name: Working on users
+  hosts: all
+  tasks:
+    - name: Create user
+      user:
+        name: Anu
+        password: intelliqit
+        uid: 5678
+      register: a
+    - name: Display output of the above module
+      debug:
+        var: a
+    - name: Chage shell of user if home dir of the user is /tmp/Anu
+      user:
+        name: Anu
+        shell: /bin/sh
+      when: a.home == "/tmp/Anu"
+...
