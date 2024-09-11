@@ -1,0 +1,14 @@
+---
+- name: Install tomcat10 and apache2
+  hosts: all
+  tasks:
+    - name: Install apache2 and tomcat9
+      include_tasks: "{{item}}"
+      with_items:
+        - install.yml
+        - install_tomcat.yml
+    - name: Restart apache2 and tomcat9
+      include_tasks: "{{item}}"
+      with_items:
+        - restart.yml
+        - restart_tomcat.yml

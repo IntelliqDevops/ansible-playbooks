@@ -1,0 +1,9 @@
+---
+- name: Remove git from all servers
+  hosts: all
+  tasks:
+    - name: Uninstall git
+      apt:
+        name: git
+        state: absent
+...
