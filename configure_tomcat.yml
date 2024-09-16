@@ -1,0 +1,14 @@
+---
+- name: Configure tomcat using childplaybooks and variables
+  hosts: all
+  tasks:
+    - name: Call multiple childplaybooks for tomcat
+      include_tasks: "{{item}}"
+      with_items:
+        - installtomcat.yml
+        - copy_tomcat_users.yml
+        - change_port.yml
+        - restart_tomcat.yml
+        - pause.yml
+        - check_tomcat_response.yml
+
